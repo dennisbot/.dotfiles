@@ -1,0 +1,23 @@
+[user]
+	name = Dennis Huillca
+	email = dennisbot@able.co
+[alias]
+	lg = log --color --graph --branches --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit
+  hist = log --color --graph --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --decorate
+    unstage = reset HEAD --
+    restore = checkout --
+    cn = commit --no-verify
+    co = checkout
+    praise = blame
+    visualise = !gitk
+    graph = log --color --graph --pretty=format:\"%h | %ad | %an | %s%d\" --date=short
+[core]
+	excludesfile = /Users/dennisbot/.gitignore_global
+	trustctime = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[pull]
+	rebase = true
