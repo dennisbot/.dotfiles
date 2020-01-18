@@ -1,6 +1,6 @@
 [user]
 	name = Dennis Huillca
-	email = dennisbot@able.co
+	email = dennisbot@gmail.com
 [alias]
 	lg = log --color --graph --branches --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit
   hist = log --color --graph --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --decorate
