@@ -21,7 +21,11 @@ export EDITOR="sublime -n -w"
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
 }
-export PS1='\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\e[31m\]\h\[`tput sgr0`\]\[\e[34m\]:$PWD\n\[\e[32m\]$(parse_git_branch)\$ \[\e[m\]'
+BLUE='\[\033[38;5;39m\]'
+PALE_YELLOW='\[\033[38;5;229m\]'
+RESET='\[$(tput sgr0)\]'
+GREEN='\[\033[38;5;76m\]'
+export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]${PALE_YELLOW}\h${RESET}${BLUE}:$PWD\n\[\e[32m\]$(parse_git_branch)\$ \[\e[m\]"
 # export PS1="\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]"
 
 export ANDROID_HOME=/Users/dennisbot/Library/Android/sdk
