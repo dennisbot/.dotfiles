@@ -1,23 +1,30 @@
-SHELL_SESSION_HISTORY=0
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# ~/.profile: executed by the command interpreter for login shells.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
+# exists.
+# see /usr/share/doc/bash/examples/startup-files for examples.
+# the files are located in the bash-doc package.
 
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
+# the default umask is set in /etc/profile; for setting the umask
+# for ssh logins, install and configure the libpam-umask package.
+#umask 022
 
-# Avoid duplicates
-export HISTCONTROL=ignoreboth:erasedups  
-# When the shell exits, append to the history file instead of overwriting it
-shopt -s globstar
-shopt -s histappend
-# After each command, append to the history file and reread it
-export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
-# After each command, append to the history file and reread it
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
 
-export PATH="$HOME/.yarn/bin:$PATH"
-export EDITOR="sublime -n -w"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
 }
@@ -25,13 +32,13 @@ BLUE='\[\033[38;5;39m\]'
 PALE_YELLOW='\[\033[38;5;229m\]'
 RESET='\[`tput sgr0`\]'
 GREEN='\[\033[38;5;76m\]'
-export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]${PALE_YELLOW}\h${RESET}${BLUE}:$PWD\n\[\e[32m\]$(parse_git_branch)\$ \[\e[m\]"
+ORANGE='\[\e[32m\]'
+export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]${PALE_YELLOW}\u${ORANGE}@${PALE_YELLOW}\h${RESET}${BLUE}:\w\n${ORANGE}$(parse_git_branch)\$ \[\e[m\]"
 # export PS1="\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]"
-
-export ANDROID_HOME=/Users/dennisbot/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-
-alias lu='history|cut -c 8-|sort|uniq|grep --color'
 alias grep='grep --color=auto'
-alias config='/usr/bin/git --git-dir=/Users/dennisbot/.dotfiles/ --work-tree=/Users/dennisbot'
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+  
