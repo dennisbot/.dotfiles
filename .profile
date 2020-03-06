@@ -16,6 +16,9 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+shopt -s globstar
+shopt -s histappend
+
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
@@ -41,4 +44,3 @@ alias grep='grep --color=auto'
 export PATH="$PATH:$HOME/.rvm/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-  
