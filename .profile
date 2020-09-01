@@ -35,8 +35,7 @@ BLUE='\[\033[38;5;39m\]'
 PALE_YELLOW='\[\033[38;5;229m\]'
 RESET='\[`tput sgr0`\]'
 GREEN='\[\033[38;5;76m\]'
-ORANGE='\[\e[32m\]'
-export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]${PALE_YELLOW}\u${ORANGE}@${PALE_YELLOW}\h${RESET}${BLUE}:\w\n${ORANGE}$(parse_git_branch)\$ \[\e[m\]"
+export PS1="\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]${PALE_YELLOW}\h${RESET}${BLUE}:$PWD\n\[\e[32m\]$(parse_git_branch)\$ \[\e[m\]"
 # export PS1="\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]"
 alias grep='grep --color=auto'
 
