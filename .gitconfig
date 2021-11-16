@@ -1,6 +1,8 @@
 [user]
   name = Dennis Huillca
   email = dennisbot@gmail.com
+[credential]
+  helper = manager
 [alias]
   lg = log --color --graph --branches --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit
   hist = log --color --graph --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --decorate
@@ -13,9 +15,11 @@
   quote-string = "!read -r l; printf \\\"!; printf %s \"$l\" | sed 's/\\([\\\"]\\)/\\\\\\1/g'; printf \" #\\\"\\n\" #"
   quote-string-undo = "!read -r l; printf %s \"$l\" | sed 's/\\\\\\([\\\"]\\)/\\1/g'; printf \"\\n\" #"
   cls = "!git branch --merged | egrep -v '(^\\*|master|dev)' | xargs git branch -d #"
+  bclean = "!f() { git branch --merged ${1-develop} | grep -v " ${1-develop}$" | xargs -r git branch -d; }; f"
   graph = log --color --graph --pretty=format:\"%h | %ad | %an | %s%d\" --date=short
   st = status
   rebaseidev = "!git rebase -i $(git merge-base --fork-point dev)"
+  rebasei = "!f() { git rebase -i $(git merge-base --fork-point \"$1\");}; f"
   dif = "!f() { git diff --color  ${1} | sed -r \"s/^([^-+ ]*)[-+ ]/\\1/\" | less -r; }; f"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/'
 [core]
@@ -25,7 +29,7 @@
   ignorecase = false
   longpaths = true
   excludesFile = C:/Users/dennisbot/.gitignore_global
-  autocrlf = false
+  safecrlf = false
 [filter "lfs"]
   process = git-lfs filter-process
   required = true
@@ -42,4 +46,4 @@
 [web]
     browser = "chrome"
 [browser "chrome"]
-    path = C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe
+    path = C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe
