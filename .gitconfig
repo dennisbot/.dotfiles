@@ -22,6 +22,7 @@
   rebasei = "!f() { git rebase -i $(git merge-base --fork-point \"$1\");}; f"
   dif = "!f() { git diff --color  ${1} | sed -r \"s/^([^-+ ]*)[-+ ]/\\1/\" | less -r; }; f"
   alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/'
+  sync = "!f() { git branch -r | grep -v '\\->' | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done }; f"
 [core]
   trustctime = false
   editor =  "code --wait"
@@ -43,9 +44,8 @@
     cmd = code --wait --diff $LOCAL $REMOTE
 [gui]
   recentrepo = D:/github/gitflow-demo
-[web]
-    browser = "chrome"
-[browser "chrome"]
-    path = C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe
 [push]
     autoSetupRemote = true
+[credential]
+    helper = wincred
+    useHttpPath = true
